@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BikeStore", "BikeStore\BikeStore.sqlproj", "{32A16C2D-7337-4766-A995-0F3B9A372CC2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32A16C2D-7337-4766-A995-0F3B9A372CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A16C2D-7337-4766-A995-0F3B9A372CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A16C2D-7337-4766-A995-0F3B9A372CC2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{32A16C2D-7337-4766-A995-0F3B9A372CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A16C2D-7337-4766-A995-0F3B9A372CC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32A16C2D-7337-4766-A995-0F3B9A372CC2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3389FEB-2E1D-448A-BF39-E58ADBD55AB4}
+	EndGlobalSection
+EndGlobal
