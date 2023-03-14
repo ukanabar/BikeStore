@@ -1,4 +1,4 @@
-CREATE TABLE Employee
+CREATE TABLE Person
 (  
     EmployeeID int,
     FirstName nvarchar(50) NOT NULL,  
