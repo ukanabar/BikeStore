@@ -253,7 +253,7 @@ stages:
         steps:
         
           - task: FlywayInstaller@0
-              inputs:
+            inputs:
                 flywayVersion: '6.5.0'
                 
           - script: '$(FLYWAY) info migrate -outOfOrder=true info -url="$(target_database_JDBC)" -baselineVersion=$(BASELINE_VERSION)'
