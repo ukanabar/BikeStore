@@ -89,6 +89,8 @@ stages:
         - task: FlywayInstaller@0
           inputs:
             flywayVersion: '6.5.0'
+
+        
         
         - script: '$(FLYWAY) clean info -url="$(target_database_JDBC)"'
           failOnStderr: true
