@@ -60,7 +60,7 @@ variables:
   # This is the relative path to the migrations folder in your project, such as:
   # $(System.DefaultWorkingDirectory)\project
   # The default is to have the migrations folder in the same directory as the yml file
-  WORKING_DIRECTORY: $(System.DefaultWorkingDirectory)
+  WORKING_DIRECTORY: $(System.DefaultWorkingDirectory)\BikeStore
 
   FLYWAY: 'flyway -user="$(userName)" -password="$(password)" -baselineOnMigrate=true -licenseKey=$(FLYWAY_LICENSE_KEY) -configFiles="$(WORKING_DIRECTORY)\flyway.conf" -locations="filesystem:$(WORKING_DIRECTORY)\migrations"'
   
@@ -89,11 +89,6 @@ stages:
         - task: FlywayInstaller@0
           inputs:
             flywayVersion: '6.5.0'
-
-        - task: Bash@3
-          inputs:
-            targetType: 'inline'
-            script: 'ls -l $(WORKING_DIRECTORY)'
 
         - script: '$(FLYWAY) clean info -url="$(target_database_JDBC)"'
           failOnStderr: true
