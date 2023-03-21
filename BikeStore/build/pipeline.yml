@@ -89,13 +89,6 @@ stages:
         - task: FlywayInstaller@0
           inputs:
             flywayVersion: '6.5.0'
-        - task: FlywayCLI@0
-          inputs:
-            command: 'info'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/_ukanabar_BikeStore/BikeStore/migrations'
-            url: '$(target_database_JDBC)'
-            user: '$(userName)'
-            password: '$(password)'
 
         - script: '$(FLYWAY) clean info -url="$(target_database_JDBC)"'
           failOnStderr: true
