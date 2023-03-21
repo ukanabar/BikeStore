@@ -136,6 +136,10 @@ stages:
               downloadType: 'single'
               artifactName: '$(BUILD_NAME)'
               downloadPath: '$(System.ArtifactsDirectory)'
+              
+          - task: FlywayInstaller@0
+          inputs:
+            flywayVersion: '6.5.0'
       
       - ${{if eq(stage.staticCodeAnalysis, true)}}:
         - job: ChangeReport
