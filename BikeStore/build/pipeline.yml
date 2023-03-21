@@ -135,11 +135,8 @@ stages:
               buildType: 'current'
               downloadType: 'single'
               artifactName: '$(BUILD_NAME)'
-              downloadPath: '$(System.ArtifactsDirectory)'
-              
-          - task: FlywayInstaller@0
-            inputs:
-              flywayVersion: '6.5.0'
+              downloadPath: '$(System.ArtifactsDirectory)'            
+          
       
       - ${{if eq(stage.staticCodeAnalysis, true)}}:
         - job: ChangeReport
@@ -153,6 +150,10 @@ stages:
             - script: 'pip install sqlfluff==1.3.2'
               displayName: 'Install SQL Fluff'
               continueOnError: true
+            
+            - task: FlywayInstaller@0
+              inputs:
+                flywayVersion: '6.5.0'
             
             - script: '$(FLYWAY) check -dryrun -changes -drift -code -check.failOnDrift="${{stage.failReleaseIfDriftDetected}}" -check.buildUrl="$(check_JDBC)" -check.buildUser="$(check_userName)" -check.buildPassword="$(check_password)" -url="$(target_database_JDBC)" -check.reportFilename="$(System.ArtifactsDirectory)/$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)"'
               workingDirectory: '$(WORKING_DIRECTORY)'
@@ -176,6 +177,10 @@ stages:
           - group: ${{stage.variableGroupName}}
           - group: rg_flyway_vars
           steps:
+          
+            - task: FlywayInstaller@0
+              inputs:
+                flywayVersion: '6.5.0'
 
             - script: '$(FLYWAY) check -dryrun -changes -drift -check.failOnDrift="${{stage.failReleaseIfDriftDetected}}" -check.buildUrl="$(check_JDBC)" -check.buildUser="$(check_userName)" -check.buildPassword="$(check_password)" -url="$(target_database_JDBC)" -check.reportFilename="$(System.ArtifactsDirectory)/$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)"'
               workingDirectory: '$(WORKING_DIRECTORY)'
@@ -200,6 +205,10 @@ stages:
           - group: rg_flyway_vars
           steps:
 
+            - task: FlywayInstaller@0
+              inputs:
+                flywayVersion: '6.5.0'
+            
             - script: '$(FLYWAY) check -dryrun -url="$(target_database_JDBC)" -check.reportFilename="$(System.ArtifactsDirectory)/$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)"'
               workingDirectory: '$(WORKING_DIRECTORY)'
               failOnStderr: true
@@ -242,7 +251,11 @@ stages:
         - group: ${{stage.variableGroupName}}
         - group: rg_flyway_vars
         steps:
-
+        
+          - task: FlywayInstaller@0
+              inputs:
+                flywayVersion: '6.5.0'
+                
           - script: '$(FLYWAY) info migrate -outOfOrder=true info -url="$(target_database_JDBC)" -baselineVersion=$(BASELINE_VERSION)'
             workingDirectory: $(WORKING_DIRECTORY)
             displayName: ${{stage.displayName}}
