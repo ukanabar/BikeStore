@@ -150,7 +150,7 @@ stages:
               displayName: 'Install SQL Fluff'
               continueOnError: true
             
-            - script: '$(FLYWAY) check -dryrun -changes -drift -code -check.failOnDrift="${{stage.failReleaseIfDriftDetected}}" -check.buildUrl="$(check_JDBC)" -check.buildUser="$(check_userName)" -check.buildPassword="$(check_password)" -url="$(target_database_JDBC)" -check.reportFilename="$(System.ArtifactsDirectory)\$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)"'
+            - script: '$(FLYWAY) check -dryrun -changes -drift -code -check.failOnDrift="${{stage.failReleaseIfDriftDetected}}" -check.buildUrl="$(check_JDBC)" -check.buildUser="$(check_userName)" -check.buildPassword="$(check_password)" -url="$(target_database_JDBC)" -check.reportFilename="$(System.ArtifactsDirectory)/$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)"'
               workingDirectory: '$(WORKING_DIRECTORY)'
               failOnStderr: true
               displayName: '$(DRIFT_AND_CHANGE_REPORT_DISPLAY_NAME)'
@@ -162,7 +162,7 @@ stages:
               condition: always()
               inputs:
                 ArtifactName: '$(DRIFT_AND_CHANGE_REPORT_DISPLAY_NAME)'
-                PathtoPublish: '$(System.ArtifactsDirectory)\$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)'
+                PathtoPublish: '$(System.ArtifactsDirectory)/$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)'
 
       - ${{if and(eq( stage.generateDriftAndChangeReport, true), eq( stage.staticCodeAnalysis, false))}}:
         - job: ChangeReport
@@ -173,7 +173,7 @@ stages:
           - group: rg_flyway_vars
           steps:
 
-            - script: '$(FLYWAY) check -dryrun -changes -drift -check.failOnDrift="${{stage.failReleaseIfDriftDetected}}" -check.buildUrl="$(check_JDBC)" -check.buildUser="$(check_userName)" -check.buildPassword="$(check_password)" -url="$(target_database_JDBC)" -check.reportFilename="$(System.ArtifactsDirectory)\$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)"'
+            - script: '$(FLYWAY) check -dryrun -changes -drift -check.failOnDrift="${{stage.failReleaseIfDriftDetected}}" -check.buildUrl="$(check_JDBC)" -check.buildUser="$(check_userName)" -check.buildPassword="$(check_password)" -url="$(target_database_JDBC)" -check.reportFilename="$(System.ArtifactsDirectory)/$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)"'
               workingDirectory: '$(WORKING_DIRECTORY)'
               failOnStderr: true
               displayName: '$(DRIFT_AND_CHANGE_REPORT_DISPLAY_NAME)'
@@ -185,7 +185,7 @@ stages:
               condition: always()
               inputs:
                 ArtifactName: '$(DRIFT_AND_CHANGE_REPORT_DISPLAY_NAME)'
-                PathtoPublish: '$(System.ArtifactsDirectory)\$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)'
+                PathtoPublish: '$(System.ArtifactsDirectory)/$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)'
       
       - ${{if and(eq( stage.generateDriftAndChangeReport, false), eq( stage.staticCodeAnalysis, false))}}:
         - job: ChangeReport
@@ -196,7 +196,7 @@ stages:
           - group: rg_flyway_vars
           steps:
 
-            - script: '$(FLYWAY) check -dryrun -url="$(target_database_JDBC)" -check.reportFilename="$(System.ArtifactsDirectory)\$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)"'
+            - script: '$(FLYWAY) check -dryrun -url="$(target_database_JDBC)" -check.reportFilename="$(System.ArtifactsDirectory)/$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)"'
               workingDirectory: '$(WORKING_DIRECTORY)'
               failOnStderr: true
               displayName: '$(DRIFT_AND_CHANGE_REPORT_DISPLAY_NAME)'
@@ -208,7 +208,7 @@ stages:
               condition: always()
               inputs:
                 ArtifactName: '$(DRIFT_AND_CHANGE_REPORT_DISPLAY_NAME)'
-                PathtoPublish: '$(System.ArtifactsDirectory)\$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)'
+                PathtoPublish: '$(System.ArtifactsDirectory)/$(databaseName)-$(Build.BuildId)-$(DRIFT_AND_CHANGE_REPORT)'
       
       - ${{if eq(stage.pauseForCodeReview, true)}}:
         - job: CodeReview
