@@ -1,4 +1,4 @@
 CREATE PROCEDURE GetPersons
 AS
-SELECT PersonID,FirstName from Person
+SELECT PersonID,FirstName,Email from Person
 GO;
