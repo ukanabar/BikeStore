@@ -1,0 +1,2 @@
+ALTER TABLE Manager
+DROP COLUMN Phone;
